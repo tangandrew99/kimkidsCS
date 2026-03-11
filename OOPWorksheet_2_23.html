@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Java OOP Worksheet — Classes & Methods</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #1a1a1a;
+    background: #fff;
+    padding: 32px 48px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header ---- */
+  .sheet-header {
+    border-bottom: 3px solid #1a3a6b;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+  .sheet-header h1 {
+    font-size: 22px;
+    color: #1a3a6b;
+    letter-spacing: 0.5px;
+  }
+  .sheet-header .meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #555;
+  }
+  .meta-field { border-bottom: 1px solid #aaa; min-width: 180px; padding-bottom: 2px; }
+
+  /* ---- Section headings ---- */
+  .section-title {
+    background: #1a3a6b;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 28px 0 14px 0;
+    letter-spacing: 0.4px;
+  }
+
+  /* ---- Question wrapper ---- */
+  .question {
+    margin-bottom: 26px;
+    page-break-inside: avoid;
+  }
+  .question-label {
+    font-weight: bold;
+    color: #1a3a6b;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .difficulty {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
+  }
+  .easy   { background: #d4edda; color: #155724; }
+  .medium { background: #fff3cd; color: #856404; }
+  .hard   { background: #f8d7da; color: #721c24; }
+
+  /* ---- Code blocks ---- */
+  pre {
+    background: #f4f4f8;
+    border: 1px solid #d0d0e0;
+    border-left: 4px solid #1a3a6b;
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 8px 0;
+    white-space: pre;
+  }
+  .comment { color: #6a737d; }
+  .kw  { color: #d73a49; font-weight: bold; }
+  .cl  { color: #6f42c1; }
+  .str { color: #032f62; }
+  .num { color: #005cc5; }
+
+  /* ---- Answer lines ---- */
+  .answer-area {
+    margin-top: 10px;
+  }
+  .answer-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .answer-line {
+    border-bottom: 1.5px solid #999;
+    height: 22px;
+    margin-bottom: 6px;
+    width: 100%;
+  }
+  .answer-line-short { width: 260px; }
+
+  /* ---- Fill-in code block ---- */
+  .fill-block {
+    background: #f4f4f8;
+    border: 1px solid #d0d0e0;
+    border-left: 4px solid #e67e22;
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    line-height: 2;
+    margin: 8px 0;
+    white-space: pre;
+  }
+  .blank {
+    display: inline-block;
+    border-bottom: 2px solid #e67e22;
+    min-width: 120px;
+    margin: 0 4px;
+    vertical-align: bottom;
+  }
+  .blank-sm { min-width: 70px; }
+  .blank-lg { min-width: 200px; }
+
+  /* ---- Hint box ---- */
+  .hint {
+    background: #fffbea;
+    border: 1px solid #f0c040;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: #6b5000;
+    margin-top: 6px;
+  }
+  .hint::before { content: "💡 Hint: "; font-weight: bold; }
+
+  /* ---- Concept box ---- */
+  .concept-box {
+    background: #eef3fb;
+    border: 1px solid #b0c4de;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .concept-box strong { color: #1a3a6b; }
+
+  /* ---- Multiple choice ---- */
+  .choices { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .choice { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+  .choice-box {
+    width: 16px; height: 16px;
+    border: 1.5px solid #888;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ---- Footer ---- */
+  .footer {
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+  }
+
+  @media print {
+    body { padding: 20px 32px; }
+    .question { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<div class="sheet-header">
+  <h1>☕ Java OOP Worksheet — Classes, Objects &amp; Methods</h1>
+  <div class="meta">
+    <span>Name: <span class="meta-field">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+    <span>Date: <span class="meta-field">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+  </div>
+</div>
+
+<!-- ===================== REFERENCE BOX ===================== -->
+<div class="concept-box">
+  <strong>Quick Reference — Key Ideas</strong><br>
+  A <strong>class</strong> is a blueprint. An <strong>object</strong> is a thing built from that blueprint using <code>new</code>.<br>
+  An <strong>attribute</strong> is data the object stores. A <strong>method</strong> is something the object can do.<br>
+  We call a method like this: &nbsp;<code>objectName.methodName()</code><br>
+  <strong>ArrayList</strong> — a list that can grow: &nbsp;<code>list.add(x)</code> &nbsp;|&nbsp; <code>list.get(i)</code> &nbsp;|&nbsp; <code>list.size()</code>
+</div>
+
+<!-- ====================================================
+     PART A — WHAT IS THE OUTPUT?
+     ==================================================== -->
+<div class="section-title">PART A — What Is The Output? &nbsp; (Write exactly what prints)</div>
+
+<!-- Q1 -->
+<div class="question">
+  <div class="question-label">Question 1 <span class="difficulty easy">EASY</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">Two files. Read both, then write what prints when <code>Main.java</code> runs.</p>
+
+<pre><span class="comment">// ----- Dog.java -----</span>
+<span class="kw">public class</span> <span class="cl">Dog</span> {
+    <span class="kw">private</span> String name;
+
+    <span class="kw">public</span> <span class="cl">Dog</span>(String name) {
+        <span class="kw">this</span>.name = name;
+    }
+
+    <span class="kw">public</span> <span class="kw">void</span> bark() {
+        System.out.println(name + <span class="str">" says: Woof!"</span>);
+    }
+}</pre>
+
+<pre><span class="comment">// ----- Main.java -----</span>
+<span class="kw">public class</span> <span class="cl">Main</span> {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="cl">Dog</span> d = <span class="kw">new</span> <span class="cl">Dog</span>(<span class="str">"Rex"</span>);
+        d.bark();
+    }
+}</pre>
+
+  <div class="answer-area">
+    <div class="answer-label">Output:</div>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="question">
+  <div class="question-label">Question 2 <span class="difficulty easy">EASY</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">What prints? Pay attention to the <strong>two</strong> objects being created.</p>
+
+<pre><span class="comment">// ----- Counter.java -----</span>
+<span class="kw">public class</span> <span class="cl">Counter</span> {
+    <span class="kw">private</span> <span class="kw">int</span> count = <span class="num">0</span>;
+
+    <span class="kw">public void</span> increment() {
+        count++;
+    }
+
+    <span class="kw">public void</span> show() {
+        System.out.println(<span class="str">"Count: "</span> + count);
+    }
+}</pre>
+
+<pre><span class="comment">// ----- Main.java -----</span>
+<span class="kw">public class</span> <span class="cl">Main</span> {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="cl">Counter</span> a = <span class="kw">new</span> <span class="cl">Counter</span>();
+        <span class="cl">Counter</span> b = <span class="kw">new</span> <span class="cl">Counter</span>();
+
+        a.increment();
+        a.increment();
+        b.increment();
+
+        a.show();
+        b.show();
+    }
+}</pre>
+
+  <div class="hint">Each <code>new Counter()</code> creates a separate object with its own count.</div>
+  <div class="answer-area">
+    <div class="answer-label">Output (2 lines):</div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="question">
+  <div class="question-label">Question 3 <span class="difficulty medium">MEDIUM</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">A method <strong>returns</strong> a value. What prints?</p>
+
+<pre><span class="comment">// ----- Rectangle.java -----</span>
+<span class="kw">public class</span> <span class="cl">Rectangle</span> {
+    <span class="kw">private int</span> width;
+    <span class="kw">private int</span> height;
+
+    <span class="kw">public</span> <span class="cl">Rectangle</span>(<span class="kw">int</span> w, <span class="kw">int</span> h) {
+        width  = w;
+        height = h;
+    }
+
+    <span class="kw">public int</span> getArea() {
+        <span class="kw">return</span> width * height;
+    }
+
+    <span class="kw">public boolean</span> isSquare() {
+        <span class="kw">return</span> width == height;
+    }
+}</pre>
+
+<pre><span class="comment">// ----- Main.java -----</span>
+<span class="kw">public class</span> <span class="cl">Main</span> {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="cl">Rectangle</span> r1 = <span class="kw">new</span> <span class="cl">Rectangle</span>(<span class="num">4</span>, <span class="num">6</span>);
+        <span class="cl">Rectangle</span> r2 = <span class="kw">new</span> <span class="cl">Rectangle</span>(<span class="num">5</span>, <span class="num">5</span>);
+
+        System.out.println(r1.getArea());
+        System.out.println(r2.getArea());
+        System.out.println(r1.isSquare());
+        System.out.println(r2.isSquare());
+    }
+}</pre>
+
+  <div class="answer-area">
+    <div class="answer-label">Output (4 lines):</div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="question">
+  <div class="question-label">Question 4 <span class="difficulty medium">MEDIUM</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">One class uses another class — just like in the quiz game! What prints?</p>
+
+<pre><span class="comment">// ----- Student.java -----</span>
+<span class="kw">public class</span> <span class="cl">Student</span> {
+    <span class="kw">private</span> String name;
+    <span class="kw">private int</span>    grade;
+
+    <span class="kw">public</span> <span class="cl">Student</span>(String name, <span class="kw">int</span> grade) {
+        <span class="kw">this</span>.name  = name;
+        <span class="kw">this</span>.grade = grade;
+    }
+
+    <span class="kw">public</span> String getName()  { <span class="kw">return</span> name; }
+    <span class="kw">public int</span>    getGrade() { <span class="kw">return</span> grade; }
+
+    <span class="kw">public</span> String getResult() {
+        <span class="kw">if</span> (grade >= <span class="num">75</span>) {
+            <span class="kw">return</span> name + <span class="str">" passed!"</span>;
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> name + <span class="str">" needs to study more."</span>;
+        }
+    }
+}</pre>
+
+<pre><span class="comment">// ----- Classroom.java -----</span>
+<span class="kw">import</span> java.util.ArrayList;
+
+<span class="kw">public class</span> <span class="cl">Classroom</span> {
+    <span class="kw">private</span> ArrayList&lt;<span class="cl">Student</span>&gt; students = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">public void</span> add(<span class="cl">Student</span> s) {
+        students.add(s);
+    }
+
+    <span class="kw">public void</span> printResults() {
+        <span class="kw">int</span> i = <span class="num">0</span>;
+        <span class="kw">while</span> (i < students.size()) {
+            <span class="cl">Student</span> s = students.get(i);
+            System.out.println(s.getResult());
+            i++;
+        }
+    }
+}</pre>
+
+<pre><span class="comment">// ----- Main.java -----</span>
+<span class="kw">public class</span> <span class="cl">Main</span> {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="cl">Classroom</span> room = <span class="kw">new</span> <span class="cl">Classroom</span>();
+        room.add(<span class="kw">new</span> <span class="cl">Student</span>(<span class="str">"Ana"</span>,  <span class="num">82</span>));
+        room.add(<span class="kw">new</span> <span class="cl">Student</span>(<span class="str">"Ben"</span>,  <span class="num">65</span>));
+        room.add(<span class="kw">new</span> <span class="cl">Student</span>(<span class="str">"Cara"</span>, <span class="num">91</span>));
+        room.printResults();
+    }
+}</pre>
+
+  <div class="hint">Follow the loop — it runs once for each Student in the list.</div>
+  <div class="answer-area">
+    <div class="answer-label">Output (3 lines):</div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="question">
+  <div class="question-label">Question 5 <span class="difficulty hard">HARD</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">Trace carefully — a method modifies an object that's stored inside another object.</p>
+
+<pre><span class="comment">// ----- BankAccount.java -----</span>
+<span class="kw">public class</span> <span class="cl">BankAccount</span> {
+    <span class="kw">private</span> String owner;
+    <span class="kw">private double</span> balance;
+
+    <span class="kw">public</span> <span class="cl">BankAccount</span>(String owner, <span class="kw">double</span> startingBalance) {
+        <span class="kw">this</span>.owner   = owner;
+        <span class="kw">this</span>.balance = startingBalance;
+    }
+
+    <span class="kw">public void</span> deposit(<span class="kw">double</span> amount)  { balance += amount; }
+    <span class="kw">public void</span> withdraw(<span class="kw">double</span> amount) { balance -= amount; }
+    <span class="kw">public double</span> getBalance()          { <span class="kw">return</span> balance; }
+    <span class="kw">public</span> String getOwner()            { <span class="kw">return</span> owner; }
+}</pre>
+
+<pre><span class="comment">// ----- Bank.java -----</span>
+<span class="kw">import</span> java.util.ArrayList;
+
+<span class="kw">public class</span> <span class="cl">Bank</span> {
+    <span class="kw">private</span> ArrayList&lt;<span class="cl">BankAccount</span>&gt; accounts = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">public void</span> openAccount(<span class="cl">BankAccount</span> acc) {
+        accounts.add(acc);
+    }
+
+    <span class="kw">public void</span> printSummary() {
+        <span class="kw">int</span> i = <span class="num">0</span>;
+        <span class="kw">while</span> (i < accounts.size()) {
+            <span class="cl">BankAccount</span> acc = accounts.get(i);
+            System.out.println(acc.getOwner() + <span class="str">": $"</span> + acc.getBalance());
+            i++;
+        }
+    }
+}</pre>
+
+<pre><span class="comment">// ----- Main.java -----</span>
+<span class="kw">public class</span> <span class="cl">Main</span> {
+    <span class="kw">public static void</span> main(String[] args) {
+        <span class="cl">BankAccount</span> alice = <span class="kw">new</span> <span class="cl">BankAccount</span>(<span class="str">"Alice"</span>, <span class="num">500.0</span>);
+        <span class="cl">BankAccount</span> bob   = <span class="kw">new</span> <span class="cl">BankAccount</span>(<span class="str">"Bob"</span>,   <span class="num">200.0</span>);
+
+        alice.deposit(<span class="num">150.0</span>);
+        bob.withdraw(<span class="num">50.0</span>);
+        alice.withdraw(<span class="num">75.0</span>);
+
+        <span class="cl">Bank</span> myBank = <span class="kw">new</span> <span class="cl">Bank</span>();
+        myBank.openAccount(alice);
+        myBank.openAccount(bob);
+        myBank.printSummary();
+    }
+}</pre>
+
+  <div class="hint">Work out Alice's and Bob's final balances step by step before looking at the loop.</div>
+  <div class="answer-area">
+    <div class="answer-label">Output (2 lines):</div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+
+<!-- ====================================================
+     PART B — FILL IN THE BLANKS
+     ==================================================== -->
+<div class="section-title">PART B — Fill In The Blanks &nbsp; (Complete the missing code)</div>
+
+<!-- Q6 -->
+<div class="question">
+  <div class="question-label">Question 6 <span class="difficulty easy">EASY</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">
+    Complete the <code>Cat</code> class so that running <code>Main.java</code> prints:<br>
+    <code>Whiskers says: Meow!</code>
+  </p>
+
+<div class="fill-block"><span class="kw">public class</span> <span class="cl">Cat</span> {
+    <span class="kw">private</span> String <span class="blank blank-sm">&nbsp;</span>;           <span class="comment">// attribute to store the cat's name</span>
+
+    <span class="kw">public</span> <span class="cl">Cat</span>(String name) {
+        <span class="kw">this</span>.<span class="blank blank-sm">&nbsp;</span> = <span class="blank blank-sm">&nbsp;</span>;      <span class="comment">// save the name</span>
+    }
+
+    <span class="kw">public void</span> meow() {
+        System.out.println(<span class="blank blank-lg">&nbsp;</span>);
+    }
+}</div>
+
+<pre><span class="comment">// ----- Main.java (already done — don't change) -----</span>
+<span class="cl">Cat</span> c = <span class="kw">new</span> <span class="cl">Cat</span>(<span class="str">"Whiskers"</span>);
+c.meow();</pre>
+</div>
+
+<!-- Q7 -->
+<div class="question">
+  <div class="question-label">Question 7 <span class="difficulty easy">EASY</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">
+    Fill in the method body so it returns the correct greeting.
+  </p>
+
+<div class="fill-block"><span class="kw">public class</span> <span class="cl">Greeter</span> {
+    <span class="kw">private</span> String language;
+
+    <span class="kw">public</span> <span class="cl">Greeter</span>(String language) {
+        <span class="kw">this</span>.language = language;
+    }
+
+    <span class="comment">// Returns "Hello!" if language is "English",</span>
+    <span class="comment">// "Hola!"  if language is "Spanish",</span>
+    <span class="comment">// "Hello!" as the default for anything else.</span>
+    <span class="kw">public</span> String greet() {
+        <span class="kw">if</span> (language.equals(<span class="str">"Spanish"</span>)) {
+            <span class="kw">return</span> <span class="blank">&nbsp;</span>;
+        } <span class="kw">else</span> {
+            <span class="kw">return</span> <span class="blank">&nbsp;</span>;
+        }
+    }
+}</div>
+  <div class="hint"><code>"Hello!".equals("Hello!")</code> is how you compare Strings in Java — not <code>==</code></div>
+</div>
+
+<!-- Q8 -->
+<div class="question">
+  <div class="question-label">Question 8 <span class="difficulty medium">MEDIUM</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">
+    Complete the <code>add()</code> method and the loop so this prints the <strong>total</strong>
+    of all scores in the list.
+  </p>
+
+<div class="fill-block"><span class="kw">import</span> java.util.ArrayList;
+
+<span class="kw">public class</span> <span class="cl">ScoreTracker</span> {
+    <span class="kw">private</span> ArrayList&lt;<span class="kw">Integer</span>&gt; scores = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">public void</span> add(<span class="kw">int</span> score) {
+        scores.<span class="blank blank-sm">&nbsp;</span>(score);   <span class="comment">// add score to the list</span>
+    }
+
+    <span class="kw">public int</span> getTotal() {
+        <span class="kw">int</span> total = <span class="num">0</span>;
+        <span class="kw">int</span> i = <span class="num">0</span>;
+        <span class="kw">while</span> (i < <span class="blank blank-sm">&nbsp;</span>.size()) {   <span class="comment">// loop through all scores</span>
+            <span class="kw">int</span> s = <span class="blank blank-sm">&nbsp;</span>.get(i);
+            total = <span class="blank">&nbsp;</span>;              <span class="comment">// add each score to total</span>
+            i++;
+        }
+        <span class="kw">return</span> total;
+    }
+}</div>
+
+<pre><span class="comment">// Expected output when you run this:</span>
+<span class="cl">ScoreTracker</span> t = <span class="kw">new</span> <span class="cl">ScoreTracker</span>();
+t.add(<span class="num">10</span>); t.add(<span class="num">20</span>); t.add(<span class="num">5</span>);
+System.out.println(t.getTotal()); <span class="comment">// should print: 35</span></pre>
+</div>
+
+<!-- Q9 -->
+<div class="question">
+  <div class="question-label">Question 9 <span class="difficulty medium">MEDIUM</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">
+    The <code>Library</code> class holds <code>Book</code> objects. Fill in the two missing method bodies.
+  </p>
+
+<div class="fill-block"><span class="kw">public class</span> <span class="cl">Book</span> {
+    <span class="kw">private</span> String title;
+    <span class="kw">private int</span>    pages;
+
+    <span class="kw">public</span> <span class="cl">Book</span>(String title, <span class="kw">int</span> pages) {
+        <span class="kw">this</span>.title = title;
+        <span class="kw">this</span>.pages = pages;
+    }
+
+    <span class="kw">public</span> String getTitle() { <span class="kw">return</span> title; }
+    <span class="kw">public int</span>    getPages() { <span class="kw">return</span> pages; }
+}</div>
+
+<div class="fill-block"><span class="kw">import</span> java.util.ArrayList;
+
+<span class="kw">public class</span> <span class="cl">Library</span> {
+    <span class="kw">private</span> ArrayList&lt;<span class="cl">Book</span>&gt; books = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">public void</span> addBook(<span class="cl">Book</span> b) {
+        <span class="blank blank-lg">&nbsp;</span>;          <span class="comment">// add the book to the list</span>
+    }
+
+    <span class="comment">// Prints the title of every book in the library</span>
+    <span class="kw">public void</span> printTitles() {
+        <span class="kw">int</span> i = <span class="num">0</span>;
+        <span class="kw">while</span> (i < books.size()) {
+            <span class="blank">&nbsp;</span> b = books.get(i);
+            System.out.println(<span class="blank">&nbsp;</span>);
+            i++;
+        }
+    }
+}</div>
+
+  <div class="hint">Inside the loop, <code>b</code> is a <code>Book</code> object — you can call its methods on it!</div>
+</div>
+
+<!-- Q10 -->
+<div class="question">
+  <div class="question-label">Question 10 <span class="difficulty hard">HARD</span></div>
+  <p style="margin-bottom:6px; font-size:12.5px;">
+    Write the <strong>entire</strong> <code>getHighScore()</code> method.
+    It should loop through all scores and return the biggest one.
+    Assume the list always has at least one score.
+  </p>
+
+<div class="fill-block"><span class="kw">import</span> java.util.ArrayList;
+
+<span class="kw">public class</span> <span class="cl">Game</span> {
+    <span class="kw">private</span> ArrayList&lt;<span class="kw">Integer</span>&gt; scores = <span class="kw">new</span> ArrayList&lt;&gt;();
+
+    <span class="kw">public void</span> addScore(<span class="kw">int</span> s) { scores.add(s); }
+
+    <span class="comment">// Returns the highest score in the list.</span>
+    <span class="kw">public int</span> getHighScore() {
+
+
+
+        <span class="comment">// ↑ Write your code here — use a loop!</span>
+    }
+}</div>
+
+<pre><span class="comment">// Should print: 94</span>
+<span class="cl">Game</span> g = <span class="kw">new</span> <span class="cl">Game</span>();
+g.addScore(<span class="num">72</span>); g.addScore(<span class="num">94</span>); g.addScore(<span class="num">61</span>); g.addScore(<span class="num">88</span>);
+System.out.println(g.getHighScore());</pre>
+
+  <div class="hint">Start by assuming the first score is the highest (<code>i = 1</code>). Use a <code>while</code> loop to check each remaining score: if it's bigger, update your "current best". Don't forget <code>i++</code>!</div>
+
+  <div class="answer-area" style="margin-top:10px;">
+    <div class="answer-label">Write your solution below:</div>
+    <div class="answer-line" style="margin-top:6px;"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- ====================================================
+     BONUS
+     ==================================================== -->
+<div class="section-title">🌟 BONUS — Connect It To Your Bible Quiz</div>
+
+<div class="question">
+  <p style="font-size:12.5px; margin-bottom:10px;">Answer in your own words:</p>
+
+  <p style="font-weight:bold; font-size:12.5px; margin-bottom:4px;">1. In the Bible Quiz project, which class is like <code>BankAccount</code> — it stores data about one single thing?</p>
+  <div class="answer-line"></div>
+
+  <p style="font-weight:bold; font-size:12.5px; margin-top:12px; margin-bottom:4px;">2. Which class in the quiz project holds an <code>ArrayList</code> of objects from another class?</p>
+  <div class="answer-line"></div>
+
+  <p style="font-weight:bold; font-size:12.5px; margin-top:12px; margin-bottom:4px;">3. In your own words, why is it useful to put the score logic in <code>Player.java</code> instead of directly in <code>TriviaApp.java</code>?</p>
+  <div class="answer-line"></div>
+  <div class="answer-line"></div>
+</div>
+
+
+<!-- ====================================================
+     ANSWER KEY (teacher version — toggle display)
+     ==================================================== -->
+<details style="margin-top:30px; border:1px dashed #aaa; padding:14px; border-radius:6px;">
+  <summary style="font-weight:bold; cursor:pointer; color:#1a3a6b;">📋 Answer Key (click to reveal — for teacher use)</summary>
+  <div style="margin-top:14px; font-size:12px; line-height:2;">
+    <strong>Part A:</strong><br>
+    Q1: <code>Rex says: Woof!</code><br>
+    Q2: <code>Count: 2</code> &nbsp;/&nbsp; <code>Count: 1</code><br>
+    Q3: <code>24</code> &nbsp;/&nbsp; <code>25</code> &nbsp;/&nbsp; <code>false</code> &nbsp;/&nbsp; <code>true</code><br>
+    Q4: <code>Ana passed!</code> &nbsp;/&nbsp; <code>Ben needs to study more.</code> &nbsp;/&nbsp; <code>Cara passed!</code><br>
+    Q5: <code>Alice: $575.0</code> &nbsp;/&nbsp; <code>Bob: $150.0</code><br>
+    <br>
+    <strong>Part B:</strong><br>
+    Q6: attribute = <code>name</code>; constructor: <code>this.name = name</code>; println: <code>(name + " says: Meow!")</code><br>
+    Q7: Spanish → <code>"Hola!"</code>; else → <code>"Hello!"</code><br>
+    Q8: <code>scores.add(score)</code>; loop over <code>scores</code>; total update: <code>total + s</code> or <code>total += s</code><br>
+    Q9: <code>books.add(b)</code>; loop type: <code>Book</code>; println: <code>b.getTitle()</code><br>
+    Q10: Set <code>int best = scores.get(0)</code>; start <code>int i = 1</code>; <code>while (i &lt; scores.size())</code> with <code>if (scores.get(i) &gt; best) best = scores.get(i);</code> then <code>i++</code>; return <code>best</code><br>
+    <br>
+    <strong>Bonus:</strong><br>
+    1. <code>Question</code> (or Player)<br>
+    2. <code>Quiz</code> (holds ArrayList&lt;Question&gt;)<br>
+    3. Open answer — e.g. "so the score logic is in one place and can be reused / tested separately"
+  </div>
+</details>
+
+<div class="footer">Java OOP Worksheet &nbsp;|&nbsp; Classes, Objects &amp; Methods &nbsp;|&nbsp; Page 1</div>
+
+</body>
+</html>

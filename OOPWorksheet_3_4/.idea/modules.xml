@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Problem1_Library_and_Book/Problem1_Library_and_Book.iml" filepath="$PROJECT_DIR$/Problem1_Library_and_Book/Problem1_Library_and_Book.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem2_Student_and_Gradebook/Problem2_Student_and_Gradebook.iml" filepath="$PROJECT_DIR$/Problem2_Student_and_Gradebook/Problem2_Student_and_Gradebook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem3_Product_and_Store/Problem3_Product_and_Store.iml" filepath="$PROJECT_DIR$/Problem3_Product_and_Store/Problem3_Product_and_Store.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem4_Player_and_Game/Problem4_Player_and_Game.iml" filepath="$PROJECT_DIR$/Problem4_Player_and_Game/Problem4_Player_and_Game.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem5_Task_and_TodoList/Problem5_Task_and_TodoList.iml" filepath="$PROJECT_DIR$/Problem5_Task_and_TodoList/Problem5_Task_and_TodoList.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem6_BankAccount_and_Bank/Problem6_BankAccount_and_Bank.iml" filepath="$PROJECT_DIR$/Problem6_BankAccount_and_Bank/Problem6_BankAccount_and_Bank.iml" />
+    </modules>
+  </component>
+</project>

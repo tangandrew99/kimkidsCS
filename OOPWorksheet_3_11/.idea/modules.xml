@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Problem1_Team/Problem1_Team.iml" filepath="$PROJECT_DIR$/Problem1_Team/Problem1_Team.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem2_Playlist/Problem2_Playlist.iml" filepath="$PROJECT_DIR$/Problem2_Playlist/Problem2_Playlist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem3_Player_and_ProfilePrinter/Problem3_Player_and_ProfilePrinter.iml" filepath="$PROJECT_DIR$/Problem3_Player_and_ProfilePrinter/Problem3_Player_and_ProfilePrinter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem4_MovieCollection/Problem4_MovieCollection.iml" filepath="$PROJECT_DIR$/Problem4_MovieCollection/Problem4_MovieCollection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Problem5_Smash_Roster/Problem5_Smash_Roster.iml" filepath="$PROJECT_DIR$/Problem5_Smash_Roster/Problem5_Smash_Roster.iml" />
+    </modules>
+  </component>
+</project>
